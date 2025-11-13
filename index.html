@@ -1,12 +1,718 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8" />
-<title>منصة آن للدعاية والإعلان</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-<h1>منصة آن للدعاية والإعلان – النسخة المحدثة</h1>
-<p>هذا الإصدار يحتوي على تفعيل الحسابات والخدمات.</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>منصة آن للدعاية والإعلان</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: #020617;
+        color: #111827;
+      }
+      a { text-decoration: none; }
+      .navbar {
+        padding: 10px 20px;
+        background: #020617;
+        color: #f9fafb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .navbar-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .navbar-title {
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .navbar-user {
+        font-size: 13px;
+        color: #9ca3af;
+      }
+      .btn {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .btn-primary {
+        background-color: #2563EB;
+        color: white;
+      }
+      .btn-outline {
+        background-color: transparent;
+        color: #e5e7eb;
+        border: 1px solid #4b5563;
+      }
+      .hero {
+        padding: 40px 20px 32px;
+        background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #020617 100%);
+        color: #f9fafb;
+        text-align: right;
+      }
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 30px;
+      }
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .hero-title {
+        font-size: 28px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+      .hero-text {
+        font-size: 16px;
+        color: #e5e7eb;
+        margin-bottom: 20px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+      .hero-card {
+        background-color: rgba(15,23,42,0.95);
+        border-radius: 16px;
+        border: 1px solid rgba(148,163,184,0.4);
+        padding: 16px;
+        font-size: 14px;
+        color: #e5e7eb;
+      }
+      .tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        background-color: rgba(37,99,235,0.2);
+        color: #bfdbfe;
+        margin-bottom: 8px;
+      }
+      .section {
+        padding: 40px 20px;
+      }
+      .section-light {
+        background-color: #f9fafb;
+      }
+      .section-white {
+        background-color: #ffffff;
+      }
+      .section-dark {
+        background-color: #020617;
+        color: #e5e7eb;
+      }
+      .section-title {
+        font-size: 22px;
+        margin-bottom: 8px;
+        text-align: right;
+      }
+      .section-subtitle {
+        font-size: 14px;
+        color: #6b7280;
+        margin-top: 0;
+        margin-bottom: 20px;
+        text-align: right;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #e5e7eb;
+        text-align: right;
+      }
+      .card-muted {
+        background-color: #f9fafb;
+      }
+      .card-dark {
+        background-color: #020617;
+        border-color: #1f2937;
+        color: #e5e7eb;
+      }
+      .card h3 {
+        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+      .card p {
+        font-size: 14px;
+        color: #4b5563;
+        margin: 0;
+      }
+      .card-dark p {
+        color: #9ca3af;
+      }
+      .list-compact {
+        margin: 0;
+        padding-inline-start: 18px;
+        font-size: 13px;
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .two-col {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .form-card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        padding: 16px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      input, select, textarea {
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        font-size: 13px;
+        font-family: inherit;
+      }
+      textarea { min-height: 70px; resize: vertical; }
+      .field {
+        margin-bottom: 10px;
+      }
+      .error {
+        color: #b91c1c;
+        font-size: 12px;
+        margin-top: 4px;
+      }
+      .dashboard {
+        display: none;
+      }
+      .dashboard.active {
+        display: block;
+      }
+      .dashboard-header {
+        margin-bottom: 16px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        background-color: #e5e7eb;
+        color: #374151;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th, td {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 6px 4px;
+        text-align: right;
+      }
+      th {
+        background-color: #f3f4f6;
+        font-weight: 600;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      footer {
+        padding: 16px 20px;
+        background-color: #020617;
+        color: #9ca3af;
+        font-size: 12px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <img src="assets/logo-an.svg" alt="شعار آن" width="32" height="32" />
+        <div class="navbar-title">آن للدعاية والإعلان</div>
+      </div>
+      <div>
+        <span class="navbar-user" id="navbarUser">غير مسجل</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <h1 class="hero-title">
+              منصة تربط بين العميل، المصمم، والمطبعة<br />
+              مع لوحة إدارة واضحة للحسابات والخدمات
+            </h1>
+            <p class="hero-text">
+              آن للدعاية والإعلان منصة رقمية لإدارة طلبات التصميم والطباعة
+              عبر حسابات مفعّلة: العميل، المصمم، المطبعة، والإدارة. هذا النموذج
+              يوضح فكرة المنصة، وهو جاهز للعرض على الشركاء أو المستثمرين،
+              وقابل للتطوير إلى نظام تشغيلي متكامل.
+            </p>
+            <div class="hero-actions">
+              <a href="#accounts" class="btn btn-primary">استعراض الحسابات</a>
+              <a href="#login" class="btn btn-outline">الدخول للمنصة التجريبية</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <span class="tag">رحلة طلب واحدة عبر آن</span>
+            <ol style="padding-inline-start:18px; margin:0;">
+              <li>العميل ينشئ طلب تصميم إعلان أو هوية.</li>
+              <li>مصمم معتمد يستلم الطلب ويجهز التصميم.</li>
+              <li>بعد اعتماد العميل، يُحوَّل الطلب إلى مطبعة معتمدة.</li>
+              <li>المطبعة تنفذ الطباعة وتُحدّث حالة التقدم.</li>
+              <li>الإدارة تتابع الجودة والتقارير من لوحة واحدة.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- Accounts Section -->
+      <section id="accounts" class="section section-dark">
+        <div class="container">
+          <h2 class="section-title">الحسابات الرئيسية في منصة آن</h2>
+          <p class="section-subtitle">
+            كل حساب له خدمات محددة، من طلب التصميم إلى تنفيذه وطباعة المواد الإعلانية.
+          </p>
+          <div class="grid">
+            <div class="card card-dark">
+              <h3>حساب العميل</h3>
+              <p>لروّاد الأعمال، المتاجر، الأفراد والشركات.</p>
+              <ul class="list-compact">
+                <li>إنشاء طلبات تصميم جديدة.</li>
+                <li>اختيار نوع الخدمة (شعار، هوية، إعلان، مطبوعة...).</li>
+                <li>متابعة حالة الطلب والتعديلات.</li>
+                <li>اختيار إضافة خدمة الطباعة وربطها بالمطبعة.</li>
+              </ul>
+            </div>
+            <div class="card card-dark">
+              <h3>حساب المصمم</h3>
+              <p>للمصممين المستقلين أو فرق التصميم.</p>
+              <ul class="list-compact">
+                <li>استلام الطلبات وتصنيفها حسب التخصص.</li>
+                <li>رفع المسودات والنسخ النهائية.</li>
+                <li>إدارة التعديلات والتواصل مع العميل داخل المنصة.</li>
+                <li>متابعة العمولات وسجل المشاريع.</li>
+              </ul>
+            </div>
+            <div class="card card-dark">
+              <h3>حساب المطبعة</h3>
+              <p>للمطابع التجارية المعتمدة.</p>
+              <ul class="list-compact">
+                <li>استقبال ملفات جاهزة للطباعة من المصممين.</li>
+                <li>تقديم تسعير للطباعة حسب المواصفات.</li>
+                <li>تحديث حالة التنفيذ والتسليم.</li>
+                <li>استعراض تاريخ الطلبات والتقارير المالية.</li>
+              </ul>
+            </div>
+            <div class="card card-dark">
+              <h3>حساب الإدارة (آن)</h3>
+              <p>لإدارة المنصة ومراقبة الجودة.</p>
+              <ul class="list-compact">
+                <li>اعتماد حسابات المصممين والمطابع.</li>
+                <li>متابعة الطلبات في كل المراحل.</li>
+                <li>إدارة سياسات التسعير والعمولات.</li>
+                <li>استخراج تقارير عن الأداء والنشاط.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Login + Dashboards -->
+      <section id="login" class="section section-light">
+        <div class="container two-col">
+          <div class="form-card">
+            <h2 class="section-title" style="margin-bottom:4px;">دخول المنصة التجريبية</h2>
+            <p class="section-subtitle" style="margin-bottom:16px;">
+              اختر نوع الحساب لتجربة اللوحات المختلفة (لا توجد كلمات مرور – نموذج عرض فقط).
+            </p>
+            <form id="loginForm">
+              <div class="field">
+                <label for="username">اسم المستخدم</label>
+                <input id="username" name="username" placeholder="مثال: شركة_النور أو designer_ali" />
+              </div>
+              <div class="field">
+                <label for="role">نوع الحساب</label>
+                <select id="role" name="role">
+                  <option value="client">عميل</option>
+                  <option value="designer">مصمم</option>
+                  <option value="printer">مطبعة</option>
+                  <option value="admin">إدارة المنصة</option>
+                </select>
+              </div>
+              <div id="loginError" class="error" style="display:none;"></div>
+              <button type="submit" class="btn btn-primary" style="margin-top:4px;">
+                دخول تجريبي
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <!-- Client Dashboard -->
+            <section id="dashboard-client" class="dashboard section-white">
+              <div class="dashboard-header">
+                <h3>لوحة حساب العميل</h3>
+                <p style="font-size:13px;color:#6b7280;">
+                  هنا يقدّم العميل طلبات التصميم والطباعة ويتابع حالتها.
+                </p>
+              </div>
+              <div class="field">
+                <label>عنوان الطلب</label>
+                <input id="clientRequestTitle" placeholder="مثال: تصميم هوية لمتجر قهوة" />
+              </div>
+              <div class="field">
+                <label>نوع الخدمة</label>
+                <select id="clientServiceType">
+                  <option value="logo">تصميم شعار</option>
+                  <option value="brand">هوية بصرية كاملة</option>
+                  <option value="social">تصاميم سوشال ميديا</option>
+                  <option value="print">تصميم مطبوعات</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>إضافة طباعة؟</label>
+                <select id="clientWithPrint">
+                  <option value="no">لا، تصميم فقط</option>
+                  <option value="yes">نعم، أحتاج تصميم + طباعة</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>ملاحظات</label>
+                <textarea id="clientNotes" placeholder="ألوان مفضلة، نماذج أعجبتك، معلومات إضافية..."></textarea>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="createClientRequest()">
+                إرسال الطلب (تجريبي)
+              </button>
+
+              <h4 style="margin-top:18px;">الطلبات الأخيرة (داخل المتصفح فقط)</h4>
+              <table id="clientRequestsTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>العنوان</th>
+                    <th>الخدمة</th>
+                    <th>طباعة</th>
+                    <th>الحالة</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </section>
+
+            <!-- Designer Dashboard -->
+            <section id="dashboard-designer" class="dashboard section-white">
+              <div class="dashboard-header">
+                <h3>لوحة حساب المصمم</h3>
+                <p style="font-size:13px;color:#6b7280;">
+                  هنا يرى المصمم الطلبات المتاحة، يستلم ما يناسبه، ويحدّث حالة التنفيذ.
+                </p>
+              </div>
+              <h4>طلبات متاحة للاستلام</h4>
+              <table id="designerRequestsTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>العنوان</th>
+                    <th>الخدمة</th>
+                    <th>الحالة</th>
+                    <th>إجراء</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </section>
+
+            <!-- Printer Dashboard -->
+            <section id="dashboard-printer" class="dashboard section-white">
+              <div class="dashboard-header">
+                <h3>لوحة حساب المطبعة</h3>
+                <p style="font-size:13px;color:#6b7280;">
+                  هنا تستقبل المطبعة طلبات الطباعة المرتبطة بتصاميم معتمدة.
+                </p>
+              </div>
+              <h4>طلبات طباعة قيد الانتظار</h4>
+              <table id="printerRequestsTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>العنوان</th>
+                    <th>الخدمة</th>
+                    <th>الحالة</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <p style="font-size:12px;color:#6b7280;margin-top:8px;">
+                في النسخة التشغيلية يمكن إضافة تسعير، تحديد مواعيد التسليم، وربط المخزون والمواد.
+              </p>
+            </section>
+
+            <!-- Admin Dashboard -->
+            <section id="dashboard-admin" class="dashboard section-white">
+              <div class="dashboard-header">
+                <h3>لوحة إدارة المنصة (آن)</h3>
+                <p style="font-size:13px;color:#6b7280;">
+                  الإدارة تتابع جميع الطلبات، تراقب المصممين والمطابع، وتستعرض التقارير.
+                </p>
+              </div>
+              <h4>ملخص سريع (من بيانات المتصفح فقط)</h4>
+              <table id="adminSummaryTable">
+                <thead>
+                  <tr>
+                    <th>المؤشر</th>
+                    <th>القيمة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>إجمالي الطلبات</td>
+                    <td id="adminTotalRequests">0</td>
+                  </tr>
+                  <tr>
+                    <td>طلبات تتضمن طباعة</td>
+                    <td id="adminPrintRequests">0</td>
+                  </tr>
+                  <tr>
+                    <td>طلبات قيد التنفيذ لدى المصممين</td>
+                    <td id="adminInProgress">0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="font-size:12px;color:#6b7280;margin-top:8px;">
+                عند الانتقال إلى النسخة الفعلية يمكن ربط هذه اللوحة بقاعدة بيانات، تقارير مالية،
+                وأنظمة تحليلات متقدمة.
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      نموذج متكامل لواجهة منصة آن للدعاية والإعلان – قابل للتوسع إلى نظام تشغيلي متكامل يربط المصممين والمطابع بالعملاء عبر إدارة واحدة.
+    </footer>
+
+    <script>
+      const state = {
+        currentUser: null,
+        requests: []
+      };
+
+      function updateNavbarUser() {
+        const el = document.getElementById("navbarUser");
+        if (!state.currentUser) {
+          el.textContent = "غير مسجل";
+        } else {
+          const roleLabel = {
+            client: "عميل",
+            designer: "مصمم",
+            printer: "مطبعة",
+            admin: "إدارة"
+          }[state.currentUser.role] || state.currentUser.role;
+          el.textContent = state.currentUser.name + " (" + roleLabel + ")";
+        }
+      }
+
+      function showDashboardForRole(role) {
+        document
+          .querySelectorAll(".dashboard")
+          .forEach((d) => d.classList.remove("active"));
+        const id = {
+          client: "dashboard-client",
+          designer: "dashboard-designer",
+          printer: "dashboard-printer",
+          admin: "dashboard-admin"
+        }[role];
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) el.classList.add("active");
+        }
+        renderAllTables();
+      }
+
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const username = document.getElementById("username").value.trim();
+        const role = document.getElementById("role").value;
+        const errorEl = document.getElementById("loginError");
+        if (!username) {
+          errorEl.textContent = "الرجاء إدخال اسم المستخدم (للعرض فقط).";
+          errorEl.style.display = "block";
+          return;
+        }
+        errorEl.style.display = "none";
+        state.currentUser = { name: username, role };
+        updateNavbarUser();
+        showDashboardForRole(role);
+        document.getElementById("login").scrollIntoView({ behavior: "smooth" });
+      });
+
+      function createClientRequest() {
+        if (!state.currentUser || state.currentUser.role !== "client") {
+          alert("يجب أن تكون مسجلاً كعميل لإضافة الطلبات (نموذج تجريبي).");
+          return;
+        }
+        const title = document.getElementById("clientRequestTitle").value.trim();
+        const service = document.getElementById("clientServiceType").value;
+        const withPrint = document.getElementById("clientWithPrint").value === "yes";
+        const notes = document.getElementById("clientNotes").value.trim();
+        if (!title) {
+          alert("الرجاء إدخال عنوان للطلب.");
+          return;
+        }
+        const id = state.requests.length + 1;
+        state.requests.push({
+          id,
+          title,
+          service,
+          withPrint,
+          notes,
+          status: "pending"
+        });
+        document.getElementById("clientRequestTitle").value = "";
+        document.getElementById("clientNotes").value = "";
+        renderAllTables();
+      }
+
+      function renderAllTables() {
+        renderClientTable();
+        renderDesignerTable();
+        renderPrinterTable();
+        renderAdminSummary();
+      }
+
+      function renderClientTable() {
+        const tbody = document.querySelector("#clientRequestsTable tbody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        state.requests.forEach((r) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${r.id}</td>
+            <td>${r.title}</td>
+            <td>${serviceLabel(r.service)}</td>
+            <td>${r.withPrint ? "نعم" : "لا"}</td>
+            <td>${statusLabel(r.status)}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderDesignerTable() {
+        const tbody = document.querySelector("#designerRequestsTable tbody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        state.requests.forEach((r) => {
+          const tr = document.createElement("tr");
+          const canTake = r.status === "pending";
+          tr.innerHTML = `
+            <td>${r.id}</td>
+            <td>${r.title}</td>
+            <td>${serviceLabel(r.service)}</td>
+            <td>${statusLabel(r.status)}</td>
+            <td>
+              ${
+                canTake
+                  ? '<button class="btn btn-primary" style="padding:4px 8px;font-size:11px;" data-action="take" data-id="' +
+                    r.id +
+                    '">استلام</button>'
+                  : ""
+              }
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll("button[data-action='take']").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = Number(btn.getAttribute("data-id"));
+            const req = state.requests.find((r) => r.id === id);
+            if (req) {
+              req.status = "in_progress";
+              renderAllTables();
+            }
+          });
+        });
+      }
+
+      function renderPrinterTable() {
+        const tbody = document.querySelector("#printerRequestsTable tbody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        state.requests
+          .filter((r) => r.withPrint)
+          .forEach((r) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${r.id}</td>
+              <td>${r.title}</td>
+              <td>${serviceLabel(r.service)}</td>
+              <td>${statusLabel(r.status)}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+      }
+
+      function renderAdminSummary() {
+        const total = state.requests.length;
+        const withPrint = state.requests.filter((r) => r.withPrint).length;
+        const inProgress = state.requests.filter(
+          (r) => r.status === "in_progress"
+        ).length;
+        const totalEl = document.getElementById("adminTotalRequests");
+        const printEl = document.getElementById("adminPrintRequests");
+        const progEl = document.getElementById("adminInProgress");
+        if (totalEl) totalEl.textContent = total;
+        if (printEl) printEl.textContent = withPrint;
+        if (progEl) progEl.textContent = inProgress;
+      }
+
+      function serviceLabel(s) {
+        return {
+          logo: "تصميم شعار",
+          brand: "هوية بصرية",
+          social: "سوشال ميديا",
+          print: "مطبوعات"
+        }[s] || s;
+      }
+
+      function statusLabel(s) {
+        return {
+          pending: "في انتظار الاستلام",
+          in_progress: "قيد التنفيذ",
+          completed: "مكتمل"
+        }[s] || s;
+      }
+
+      // Initial
+      updateNavbarUser();
+    </script>
+  </body>
 </html>
