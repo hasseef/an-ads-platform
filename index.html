@@ -1,718 +1,574 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>منصة آن للدعاية والإعلان</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background-color: #020617;
-        color: #111827;
-      }
-      a { text-decoration: none; }
-      .navbar {
-        padding: 10px 20px;
-        background: #020617;
-        color: #f9fafb;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-      .navbar-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .navbar-title {
-        font-weight: 700;
-        font-size: 18px;
-      }
-      .navbar-user {
-        font-size: 13px;
-        color: #9ca3af;
-      }
-      .btn {
-        padding: 8px 14px;
-        border-radius: 999px;
-        border: none;
-        cursor: pointer;
-        font-size: 13px;
-      }
-      .btn-primary {
-        background-color: #2563EB;
-        color: white;
-      }
-      .btn-outline {
-        background-color: transparent;
-        color: #e5e7eb;
-        border: 1px solid #4b5563;
-      }
-      .hero {
-        padding: 40px 20px 32px;
-        background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #020617 100%);
-        color: #f9fafb;
-        text-align: right;
-      }
-      .container {
-        max-width: 1040px;
-        margin: 0 auto;
-      }
-      .hero-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-        gap: 30px;
-      }
-      @media (max-width: 900px) {
-        .hero-grid {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-      .hero-title {
-        font-size: 28px;
-        line-height: 1.5;
-        margin-bottom: 16px;
-      }
-      .hero-text {
-        font-size: 16px;
-        color: #e5e7eb;
-        margin-bottom: 20px;
-      }
-      .hero-actions {
-        display: flex;
-        gap: 10px;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-      }
-      .hero-card {
-        background-color: rgba(15,23,42,0.95);
-        border-radius: 16px;
-        border: 1px solid rgba(148,163,184,0.4);
-        padding: 16px;
-        font-size: 14px;
-        color: #e5e7eb;
-      }
-      .tag {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: 999px;
-        font-size: 11px;
-        background-color: rgba(37,99,235,0.2);
-        color: #bfdbfe;
-        margin-bottom: 8px;
-      }
-      .section {
-        padding: 40px 20px;
-      }
-      .section-light {
-        background-color: #f9fafb;
-      }
-      .section-white {
-        background-color: #ffffff;
-      }
-      .section-dark {
-        background-color: #020617;
-        color: #e5e7eb;
-      }
-      .section-title {
-        font-size: 22px;
-        margin-bottom: 8px;
-        text-align: right;
-      }
-      .section-subtitle {
-        font-size: 14px;
-        color: #6b7280;
-        margin-top: 0;
-        margin-bottom: 20px;
-        text-align: right;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 16px;
-      }
-      .card {
-        background-color: #ffffff;
-        border-radius: 12px;
-        padding: 16px;
-        border: 1px solid #e5e7eb;
-        text-align: right;
-      }
-      .card-muted {
-        background-color: #f9fafb;
-      }
-      .card-dark {
-        background-color: #020617;
-        border-color: #1f2937;
-        color: #e5e7eb;
-      }
-      .card h3 {
-        font-size: 16px;
-        margin-top: 0;
-        margin-bottom: 8px;
-      }
-      .card p {
-        font-size: 14px;
-        color: #4b5563;
-        margin: 0;
-      }
-      .card-dark p {
-        color: #9ca3af;
-      }
-      .list-compact {
-        margin: 0;
-        padding-inline-start: 18px;
-        font-size: 13px;
-      }
-      .two-col {
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-        gap: 24px;
-      }
-      @media (max-width: 900px) {
-        .two-col {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-      .form-card {
-        background-color: #ffffff;
-        border-radius: 12px;
-        border: 1px solid #e5e7eb;
-        padding: 16px;
-      }
-      label {
-        display: block;
-        font-size: 13px;
-        margin-bottom: 4px;
-      }
-      input, select, textarea {
-        width: 100%;
-        padding: 8px 10px;
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-        font-size: 13px;
-        font-family: inherit;
-      }
-      textarea { min-height: 70px; resize: vertical; }
-      .field {
-        margin-bottom: 10px;
-      }
-      .error {
-        color: #b91c1c;
-        font-size: 12px;
-        margin-top: 4px;
-      }
-      .dashboard {
-        display: none;
-      }
-      .dashboard.active {
-        display: block;
-      }
-      .dashboard-header {
-        margin-bottom: 16px;
-      }
-      .badge {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: 999px;
-        font-size: 11px;
-        background-color: #e5e7eb;
-        color: #374151;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-      }
-      th, td {
-        border-bottom: 1px solid #e5e7eb;
-        padding: 6px 4px;
-        text-align: right;
-      }
-      th {
-        background-color: #f3f4f6;
-        font-weight: 600;
-      }
-      tr:last-child td {
-        border-bottom: none;
-      }
-      footer {
-        padding: 16px 20px;
-        background-color: #020617;
-        color: #9ca3af;
-        font-size: 12px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="navbar-left">
-        <img src="assets/logo-an.svg" alt="شعار آن" width="32" height="32" />
-        <div class="navbar-title">آن للدعاية والإعلان</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة آن للدعاية والإعلان</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Tajawal", system-ui, -apple-system, sans-serif;
+      background: #f4f5f7;
+      color: #111827;
+    }
+
+    /* ------ NAVBAR ------ */
+    .navbar {
+      background: #020617;
+      color: #fff;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .lang-btn {
+      background: #2563eb;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ------ SECTIONS ------ */
+    section {
+      padding: 24px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero {
+      background: linear-gradient(to bottom, #1e293b, #020617);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      margin-bottom: 10px;
+      font-size: 26px;
+    }
+    .hero p {
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+
+    /* ------ TABS ------ */
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      background: #fff;
+      padding: 8px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .tab {
+      padding: 10px 16px;
+      margin-left: 10px;
+      background: #e5e7eb;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .tab.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    /* ------ CONTENT CARDS ------ */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    /* ------ FORMS ------ */
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: block;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    textarea { resize: vertical; min-height: 90px; }
+
+    .btn {
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+      font-size: 14px;
+    }
+
+    /* ------ DASHBOARD GRID ------ */
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .stat-box {
+      background: #fff;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .stat-number {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #2563eb;
+    }
+
+    /* ------ MOBILE NAV ------ */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #ddd;
+      padding: 10px 0;
+      z-index: 100;
+    }
+    .bottom-btn {
+      text-align: center;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .bottom-btn.active {
+      color: #2563eb;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="nav-title" id="navTitle">منصة آن للدعاية والإعلان</div>
+    <button id="langToggle" class="lang-btn">EN</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1 id="heroTitle">حل موحّد للعميل والمصمم والمطبعة</h1>
+    <p id="heroDesc">منصة تنظيم متكاملة لإدارة طلبات التصميم والطباعة ولوحات إدارة متقدمة.</p>
+  </section>
+
+
+  <!-- ACCOUNT TABS -->
+  <section>
+    <div class="tabs" id="accountTabs">
+      <div class="tab active" data-tab="client" id="tab-client">العميل</div>
+      <div class="tab" data-tab="designer" id="tab-designer">المصمم</div>
+      <div class="tab" data-tab="printer" id="tab-printer">المطبعة</div>
+      <div class="tab" data-tab="admin" id="tab-admin">الإدارة</div>
+    </div>
+
+    <!-- PAGE TABS -->
+    <div class="tabs" id="pageTabs">
+      <div class="tab active" data-page="dashboard" id="pg-dashboard">لوحة التحكم</div>
+      <div class="tab" data-page="forms" id="pg-forms">النماذج</div>
+      <div class="tab" data-page="reports" id="pg-reports">التقارير</div>
+      <div class="tab" data-page="settings" id="pg-settings">الإعدادات</div>
+    </div>
+    <!-- CONTENT AREA -->
+    <div id="contentArea"></div>
+  </section>
+
+
+  <!-- MOBILE BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="bottom-btn active" data-page="dashboard" onclick="switchPage('dashboard')">لوحة</div>
+    <div class="bottom-btn" data-page="forms" onclick="switchPage('forms')">نماذج</div>
+    <div class="bottom-btn" data-page="reports" onclick="switchPage('reports')">تقارير</div>
+    <div class="bottom-btn" data-page="settings" onclick="switchPage('settings')">إعدادات</div>
+  </div>
+
+
+<script>
+/* --------------------------------------------
+   STATE
+----------------------------------------------*/
+const state = {
+  lang: "ar",
+  currentAccount: "client",
+  currentPage: "dashboard",
+  requests: []
+};
+
+
+/* --------------------------------------------
+   TRANSLATIONS
+----------------------------------------------*/
+const t = {
+  nav: {
+    ar: "منصة آن للدعاية والإعلان",
+    en: "AN Advertising Platform"
+  },
+  heroTitle: {
+    ar: "حل موحّد للعميل والمصمم والمطبعة",
+    en: "Unified Solution for Clients, Designers & Printers"
+  },
+  heroDesc: {
+    ar: "منصة تنظيم متكاملة لإدارة طلبات التصميم والطباعة ولوحات إدارة متقدمة.",
+    en: "A unified system for design, print requests and full management dashboards."
+  },
+
+  tabsAccount: {
+    client: { ar: "العميل", en: "Client" },
+    designer: { ar: "المصمم", en: "Designer" },
+    printer: { ar: "المطبعة", en: "Printer" },
+    admin: { ar: "الإدارة", en: "Admin" }
+  },
+
+  tabsPage: {
+    dashboard: { ar: "لوحة التحكم", en: "Dashboard" },
+    forms: { ar: "النماذج", en: "Forms" },
+    reports: { ar: "التقارير", en: "Reports" },
+    settings: { ar: "الإعدادات", en: "Settings" }
+  }
+};
+
+
+/* --------------------------------------------
+   LANGUAGE SWITCH
+----------------------------------------------*/
+document.getElementById("langToggle").addEventListener("click", () => {
+  state.lang = state.lang === "ar" ? "en" : "ar";
+  document.getElementById("langToggle").textContent = state.lang === "ar" ? "EN" : "AR";
+  
+  applyLanguage();
+  render();
+});
+
+function applyLanguage() {
+  document.documentElement.dir = state.lang === "ar" ? "rtl" : "ltr";
+  document.getElementById("navTitle").textContent = t.nav[state.lang];
+  document.getElementById("heroTitle").textContent = t.heroTitle[state.lang];
+  document.getElementById("heroDesc").textContent = t.heroDesc[state.lang];
+
+  // Account Tabs
+  ["client","designer","printer","admin"].forEach(acc => {
+    document.getElementById("tab-"+acc).textContent = t.tabsAccount[acc][state.lang];
+  });
+
+  // Page Tabs
+  ["dashboard","forms","reports","settings"].forEach(pg => {
+    document.getElementById("pg-"+pg).textContent = t.tabsPage[pg][state.lang];
+  });
+}
+
+
+/* --------------------------------------------
+   TAB SWITCHING
+----------------------------------------------*/
+document.querySelectorAll("#accountTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#accountTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    state.currentAccount = tab.dataset.tab;
+    render();
+  });
+});
+
+document.querySelectorAll("#pageTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#pageTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    state.currentPage = tab.dataset.page;
+    switchPage(tab.dataset.page);
+    render();
+  });
+});
+
+function switchPage(pg) {
+  state.currentPage = pg;
+
+  document.querySelectorAll(".bottom-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === pg);
+  });
+  
+  render();
+}
+
+
+/* --------------------------------------------
+   CONTENT RENDERING
+----------------------------------------------*/
+function render() {
+  const area = document.getElementById("contentArea");
+  area.innerHTML = "";
+
+  if (state.currentPage === "dashboard") {
+    renderDashboard(area);
+  }
+  else if (state.currentPage === "forms") {
+    renderForms(area);
+  }
+  else if (state.currentPage === "reports") {
+    renderReports(area);
+  }
+  else if (state.currentPage === "settings") {
+    renderSettings(area);
+  }
+}
+
+
+/* --------------------------------------------
+   DASHBOARD
+----------------------------------------------*/
+function renderDashboard(area) {
+  area.innerHTML = `
+    <div class="card">
+      <h3>${state.lang === "ar" ? "لوحة مراقبة الحساب" : "Account Dashboard"}</h3>
+      <p>${state.lang === "ar" ? "مؤشرات سريعة لحالة الطلبات." : "Quick indicators of system activity."}</p>
+
+      <div class="grid">
+        <div class="stat-box">
+          <div class="stat-number">${state.requests.length}</div>
+          <div>${state.lang === "ar" ? "إجمالي الطلبات" : "Total Requests"}</div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-number">${state.requests.filter(r => r.withPrint).length}</div>
+          <div>${state.lang === "ar" ? "تشمل طباعة" : "Include Printing"}</div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-number">${state.requests.filter(r => r.status === "in_progress").length}</div>
+          <div>${state.lang === "ar" ? "قيد التنفيذ" : "In Progress"}</div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-number">${state.requests.filter(r => r.status === "completed").length}</div>
+          <div>${state.lang === "ar" ? "مكتملة" : "Completed"}</div>
+        </div>
       </div>
-      <div>
-        <span class="navbar-user" id="navbarUser">غير مسجل</span>
+    </div>
+  `;
+}
+
+
+/* --------------------------------------------
+   FORMS SECTION
+----------------------------------------------*/
+function renderForms(area) {
+
+  if (state.currentAccount === "client") {
+    area.innerHTML = `
+      <div class="card">
+        <h3>${state.lang === "ar" ? "نموذج طلب تصميم" : "Design Request Form"}</h3>
+        
+        <label>${state.lang === "ar" ? "اسم المشروع" : "Project Name"}</label>
+        <input id="clientProject" />
+
+        <label>${state.lang === "ar" ? "نوع الخدمة" : "Service Type"}</label>
+        <select id="clientService">
+          <option value="logo">${state.lang === "ar" ? "تصميم شعار" : "Logo Design"}</option>
+          <option value="brand">${state.lang === "ar" ? "هوية بصرية" : "Brand Identity"}</option>
+          <option value="social">${state.lang === "ar" ? "سوشال ميديا" : "Social Media"}</option>
+          <option value="print">${state.lang === "ar" ? "مطبوعات" : "Print Material"}</option>
+        </select>
+
+        <label>${state.lang === "ar" ? "تحتاج طباعة؟" : "Need Printing?"}</label>
+        <select id="clientPrint">
+          <option value="no">${state.lang === "ar" ? "لا" : "No"}</option>
+          <option value="yes">${state.lang === "ar" ? "نعم" : "Yes"}</option>
+        </select>
+
+        <button class="btn" onclick="submitClientForm()">${state.lang === "ar" ? "إرسال الطلب" : "Submit Request"}</button>
       </div>
-    </header>
+    `;
+  }
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <h1 class="hero-title">
-              منصة تربط بين العميل، المصمم، والمطبعة<br />
-              مع لوحة إدارة واضحة للحسابات والخدمات
-            </h1>
-            <p class="hero-text">
-              آن للدعاية والإعلان منصة رقمية لإدارة طلبات التصميم والطباعة
-              عبر حسابات مفعّلة: العميل، المصمم، المطبعة، والإدارة. هذا النموذج
-              يوضح فكرة المنصة، وهو جاهز للعرض على الشركاء أو المستثمرين،
-              وقابل للتطوير إلى نظام تشغيلي متكامل.
-            </p>
-            <div class="hero-actions">
-              <a href="#accounts" class="btn btn-primary">استعراض الحسابات</a>
-              <a href="#login" class="btn btn-outline">الدخول للمنصة التجريبية</a>
-            </div>
-          </div>
-          <div class="hero-card">
-            <span class="tag">رحلة طلب واحدة عبر آن</span>
-            <ol style="padding-inline-start:18px; margin:0;">
-              <li>العميل ينشئ طلب تصميم إعلان أو هوية.</li>
-              <li>مصمم معتمد يستلم الطلب ويجهز التصميم.</li>
-              <li>بعد اعتماد العميل، يُحوَّل الطلب إلى مطبعة معتمدة.</li>
-              <li>المطبعة تنفذ الطباعة وتُحدّث حالة التقدم.</li>
-              <li>الإدارة تتابع الجودة والتقارير من لوحة واحدة.</li>
-            </ol>
-          </div>
+
+  else if (state.currentAccount === "designer") {
+    area.innerHTML = `
+      <div class="card">
+        <h3>${state.lang === "ar" ? "تسليم المصمم" : "Designer Submission"}</h3>
+
+        <label>${state.lang === "ar" ? "رقم الطلب" : "Request ID"}</label>
+        <input id="desReqId" />
+
+        <label>${state.lang === "ar" ? "مرحلة التسليم" : "Submission Stage"}</label>
+        <select id="desStage">
+          <option value="draft">${state.lang === "ar" ? "مسودة" : "Draft"}</option>
+          <option value="revision">${state.lang === "ar" ? "تعديلات" : "Revision"}</option>
+          <option value="final">${state.lang === "ar" ? "نهائي" : "Final"}</option>
+        </select>
+
+        <button class="btn" onclick="submitDesignerForm()">
+          ${state.lang === "ar" ? "تسجيل التسليم" : "Submit Work"}
+        </button>
+      </div>
+    `;
+  }
+
+  else if (state.currentAccount === "printer") {
+    area.innerHTML = `
+      <div class="card">
+        <h3>${state.lang === "ar" ? "أمر طباعة" : "Print Order"}</h3>
+
+        <label>${state.lang === "ar" ? "رقم الطلب" : "Request ID"}</label>
+        <input id="prReqId" />
+
+        <label>${state.lang === "ar" ? "نوع المادة" : "Material Type"}</label>
+        <input id="prMaterial" />
+
+        <label>${state.lang === "ar" ? "الكمية" : "Quantity"}</label>
+        <input id="prQty" type="number" />
+
+        <button class="btn" onclick="submitPrinterForm()">
+          ${state.lang === "ar" ? "تسجيل أمر الطباعة" : "Submit Print Order"}
+        </button>
+      </div>
+    `;
+  }
+
+  else if (state.currentAccount === "admin") {
+    area.innerHTML = `
+      <div class="card">
+        <h3>${state.lang === "ar" ? "إدارة الحسابات" : "Account Management"}</h3>
+
+        <label>${state.lang === "ar" ? "نوع الحساب" : "Account Type"}</label>
+        <select>
+          <option>${state.lang === "ar" ? "مصمم" : "Designer"}</option>
+          <option>${state.lang === "ar" ? "مطبعة" : "Printer"}</option>
+        </select>
+
+        <label>${state.lang === "ar" ? "الحالة" : "Status"}</label>
+        <select>
+          <option>${state.lang === "ar" ? "قيد المراجعة" : "Pending"}</option>
+          <option>${state.lang === "ar" ? "معتمد" : "Approved"}</option>
+          <option>${state.lang === "ar" ? "مرفوض" : "Rejected"}</option>
+        </select>
+
+        <button class="btn">${state.lang === "ar" ? "حفظ" : "Save"}</button>
+      </div>
+    `;
+  }
+}
+
+
+/* --------------------------------------------
+   REPORTS SECTION
+----------------------------------------------*/
+function renderReports(area) {
+  area.innerHTML = `
+    <div class="card">
+      <h3>${state.lang === "ar" ? "لوحة التقارير" : "Reports Dashboard"}</h3>
+
+      <label>${state.lang === "ar" ? "الفترة" : "Period"}</label>
+      <select>
+        <option>${state.lang === "ar" ? "آخر 30 يوم" : "Last 30 days"}</option>
+        <option>${state.lang === "ar" ? "سنة كاملة" : "Full year"}</option>
+      </select>
+
+      <div class="grid" style="margin-top:16px;">
+        <div class="stat-box">
+          <div class="stat-number">${state.requests.length}</div>
+          <div>${state.lang === "ar" ? "طلبات جديدة" : "New Requests"}</div>
         </div>
-      </section>
 
-      <!-- Accounts Section -->
-      <section id="accounts" class="section section-dark">
-        <div class="container">
-          <h2 class="section-title">الحسابات الرئيسية في منصة آن</h2>
-          <p class="section-subtitle">
-            كل حساب له خدمات محددة، من طلب التصميم إلى تنفيذه وطباعة المواد الإعلانية.
-          </p>
-          <div class="grid">
-            <div class="card card-dark">
-              <h3>حساب العميل</h3>
-              <p>لروّاد الأعمال، المتاجر، الأفراد والشركات.</p>
-              <ul class="list-compact">
-                <li>إنشاء طلبات تصميم جديدة.</li>
-                <li>اختيار نوع الخدمة (شعار، هوية، إعلان، مطبوعة...).</li>
-                <li>متابعة حالة الطلب والتعديلات.</li>
-                <li>اختيار إضافة خدمة الطباعة وربطها بالمطبعة.</li>
-              </ul>
-            </div>
-            <div class="card card-dark">
-              <h3>حساب المصمم</h3>
-              <p>للمصممين المستقلين أو فرق التصميم.</p>
-              <ul class="list-compact">
-                <li>استلام الطلبات وتصنيفها حسب التخصص.</li>
-                <li>رفع المسودات والنسخ النهائية.</li>
-                <li>إدارة التعديلات والتواصل مع العميل داخل المنصة.</li>
-                <li>متابعة العمولات وسجل المشاريع.</li>
-              </ul>
-            </div>
-            <div class="card card-dark">
-              <h3>حساب المطبعة</h3>
-              <p>للمطابع التجارية المعتمدة.</p>
-              <ul class="list-compact">
-                <li>استقبال ملفات جاهزة للطباعة من المصممين.</li>
-                <li>تقديم تسعير للطباعة حسب المواصفات.</li>
-                <li>تحديث حالة التنفيذ والتسليم.</li>
-                <li>استعراض تاريخ الطلبات والتقارير المالية.</li>
-              </ul>
-            </div>
-            <div class="card card-dark">
-              <h3>حساب الإدارة (آن)</h3>
-              <p>لإدارة المنصة ومراقبة الجودة.</p>
-              <ul class="list-compact">
-                <li>اعتماد حسابات المصممين والمطابع.</li>
-                <li>متابعة الطلبات في كل المراحل.</li>
-                <li>إدارة سياسات التسعير والعمولات.</li>
-                <li>استخراج تقارير عن الأداء والنشاط.</li>
-              </ul>
-            </div>
-          </div>
+        <div class="stat-box">
+          <div class="stat-number">${state.requests.filter(r => r.withPrint).length}</div>
+          <div>${state.lang === "ar" ? "تشمل طباعة" : "Include Printing"}</div>
         </div>
-      </section>
+      </div>
+    </div>
+  `;
+}
 
-      <!-- Login + Dashboards -->
-      <section id="login" class="section section-light">
-        <div class="container two-col">
-          <div class="form-card">
-            <h2 class="section-title" style="margin-bottom:4px;">دخول المنصة التجريبية</h2>
-            <p class="section-subtitle" style="margin-bottom:16px;">
-              اختر نوع الحساب لتجربة اللوحات المختلفة (لا توجد كلمات مرور – نموذج عرض فقط).
-            </p>
-            <form id="loginForm">
-              <div class="field">
-                <label for="username">اسم المستخدم</label>
-                <input id="username" name="username" placeholder="مثال: شركة_النور أو designer_ali" />
-              </div>
-              <div class="field">
-                <label for="role">نوع الحساب</label>
-                <select id="role" name="role">
-                  <option value="client">عميل</option>
-                  <option value="designer">مصمم</option>
-                  <option value="printer">مطبعة</option>
-                  <option value="admin">إدارة المنصة</option>
-                </select>
-              </div>
-              <div id="loginError" class="error" style="display:none;"></div>
-              <button type="submit" class="btn btn-primary" style="margin-top:4px;">
-                دخول تجريبي
-              </button>
-            </form>
-          </div>
 
-          <div>
-            <!-- Client Dashboard -->
-            <section id="dashboard-client" class="dashboard section-white">
-              <div class="dashboard-header">
-                <h3>لوحة حساب العميل</h3>
-                <p style="font-size:13px;color:#6b7280;">
-                  هنا يقدّم العميل طلبات التصميم والطباعة ويتابع حالتها.
-                </p>
-              </div>
-              <div class="field">
-                <label>عنوان الطلب</label>
-                <input id="clientRequestTitle" placeholder="مثال: تصميم هوية لمتجر قهوة" />
-              </div>
-              <div class="field">
-                <label>نوع الخدمة</label>
-                <select id="clientServiceType">
-                  <option value="logo">تصميم شعار</option>
-                  <option value="brand">هوية بصرية كاملة</option>
-                  <option value="social">تصاميم سوشال ميديا</option>
-                  <option value="print">تصميم مطبوعات</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>إضافة طباعة؟</label>
-                <select id="clientWithPrint">
-                  <option value="no">لا، تصميم فقط</option>
-                  <option value="yes">نعم، أحتاج تصميم + طباعة</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>ملاحظات</label>
-                <textarea id="clientNotes" placeholder="ألوان مفضلة، نماذج أعجبتك، معلومات إضافية..."></textarea>
-              </div>
-              <button type="button" class="btn btn-primary" onclick="createClientRequest()">
-                إرسال الطلب (تجريبي)
-              </button>
+/* --------------------------------------------
+   SETTINGS SECTION
+----------------------------------------------*/
+function renderSettings(area) {
+  area.innerHTML = `
+    <div class="card">
+      <h3>${state.lang === "ar" ? "إعدادات الواجهة" : "Interface Settings"}</h3>
 
-              <h4 style="margin-top:18px;">الطلبات الأخيرة (داخل المتصفح فقط)</h4>
-              <table id="clientRequestsTable">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>العنوان</th>
-                    <th>الخدمة</th>
-                    <th>طباعة</th>
-                    <th>الحالة</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </section>
+      <label>${state.lang === "ar" ? "اللغة" : "Language"}</label>
+      <select onchange="changeLang(this.value)">
+        <option value="ar" ${state.lang==="ar"?"selected":""}>عربي</option>
+        <option value="en" ${state.lang==="en"?"selected":""}>English</option>
+      </select>
 
-            <!-- Designer Dashboard -->
-            <section id="dashboard-designer" class="dashboard section-white">
-              <div class="dashboard-header">
-                <h3>لوحة حساب المصمم</h3>
-                <p style="font-size:13px;color:#6b7280;">
-                  هنا يرى المصمم الطلبات المتاحة، يستلم ما يناسبه، ويحدّث حالة التنفيذ.
-                </p>
-              </div>
-              <h4>طلبات متاحة للاستلام</h4>
-              <table id="designerRequestsTable">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>العنوان</th>
-                    <th>الخدمة</th>
-                    <th>الحالة</th>
-                    <th>إجراء</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </section>
+      <label>${state.lang === "ar" ? "وضع العرض" : "Display Mode"}</label>
+      <select>
+        <option>${state.lang === "ar" ? "تطبيق جوال" : "Mobile App"}</option>
+        <option>${state.lang === "ar" ? "شاشة واسعة" : "Desktop"}</option>
+      </select>
+    </div>
+  `;
+}
 
-            <!-- Printer Dashboard -->
-            <section id="dashboard-printer" class="dashboard section-white">
-              <div class="dashboard-header">
-                <h3>لوحة حساب المطبعة</h3>
-                <p style="font-size:13px;color:#6b7280;">
-                  هنا تستقبل المطبعة طلبات الطباعة المرتبطة بتصاميم معتمدة.
-                </p>
-              </div>
-              <h4>طلبات طباعة قيد الانتظار</h4>
-              <table id="printerRequestsTable">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>العنوان</th>
-                    <th>الخدمة</th>
-                    <th>الحالة</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <p style="font-size:12px;color:#6b7280;margin-top:8px;">
-                في النسخة التشغيلية يمكن إضافة تسعير، تحديد مواعيد التسليم، وربط المخزون والمواد.
-              </p>
-            </section>
+function changeLang(val) {
+  state.lang = val;
+  applyLanguage();
+  render();
+}
 
-            <!-- Admin Dashboard -->
-            <section id="dashboard-admin" class="dashboard section-white">
-              <div class="dashboard-header">
-                <h3>لوحة إدارة المنصة (آن)</h3>
-                <p style="font-size:13px;color:#6b7280;">
-                  الإدارة تتابع جميع الطلبات، تراقب المصممين والمطابع، وتستعرض التقارير.
-                </p>
-              </div>
-              <h4>ملخص سريع (من بيانات المتصفح فقط)</h4>
-              <table id="adminSummaryTable">
-                <thead>
-                  <tr>
-                    <th>المؤشر</th>
-                    <th>القيمة</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>إجمالي الطلبات</td>
-                    <td id="adminTotalRequests">0</td>
-                  </tr>
-                  <tr>
-                    <td>طلبات تتضمن طباعة</td>
-                    <td id="adminPrintRequests">0</td>
-                  </tr>
-                  <tr>
-                    <td>طلبات قيد التنفيذ لدى المصممين</td>
-                    <td id="adminInProgress">0</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p style="font-size:12px;color:#6b7280;margin-top:8px;">
-                عند الانتقال إلى النسخة الفعلية يمكن ربط هذه اللوحة بقاعدة بيانات، تقارير مالية،
-                وأنظمة تحليلات متقدمة.
-              </p>
-            </section>
-          </div>
-        </div>
-      </section>
-    </main>
 
-    <footer>
-      نموذج متكامل لواجهة منصة آن للدعاية والإعلان – قابل للتوسع إلى نظام تشغيلي متكامل يربط المصممين والمطابع بالعملاء عبر إدارة واحدة.
-    </footer>
+/* --------------------------------------------
+   FORMS ACTIONS
+----------------------------------------------*/
+function submitClientForm() {
+  const project = document.getElementById("clientProject").value.trim();
+  const service = document.getElementById("clientService").value;
+  const withPrint = document.getElementById("clientPrint").value === "yes";
 
-    <script>
-      const state = {
-        currentUser: null,
-        requests: []
-      };
+  if (!project) return alert(state.lang==="ar"?"أدخل اسم المشروع":"Enter a project name");
 
-      function updateNavbarUser() {
-        const el = document.getElementById("navbarUser");
-        if (!state.currentUser) {
-          el.textContent = "غير مسجل";
-        } else {
-          const roleLabel = {
-            client: "عميل",
-            designer: "مصمم",
-            printer: "مطبعة",
-            admin: "إدارة"
-          }[state.currentUser.role] || state.currentUser.role;
-          el.textContent = state.currentUser.name + " (" + roleLabel + ")";
-        }
-      }
+  state.requests.push({
+    id: state.requests.length + 1,
+    project,
+    service,
+    withPrint,
+    status: "pending"
+  });
 
-      function showDashboardForRole(role) {
-        document
-          .querySelectorAll(".dashboard")
-          .forEach((d) => d.classList.remove("active"));
-        const id = {
-          client: "dashboard-client",
-          designer: "dashboard-designer",
-          printer: "dashboard-printer",
-          admin: "dashboard-admin"
-        }[role];
-        if (id) {
-          const el = document.getElementById(id);
-          if (el) el.classList.add("active");
-        }
-        renderAllTables();
-      }
+  alert(state.lang==="ar"?"تم تسجيل الطلب":"Request submitted");
+  render();
+}
 
-      document.getElementById("loginForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const username = document.getElementById("username").value.trim();
-        const role = document.getElementById("role").value;
-        const errorEl = document.getElementById("loginError");
-        if (!username) {
-          errorEl.textContent = "الرجاء إدخال اسم المستخدم (للعرض فقط).";
-          errorEl.style.display = "block";
-          return;
-        }
-        errorEl.style.display = "none";
-        state.currentUser = { name: username, role };
-        updateNavbarUser();
-        showDashboardForRole(role);
-        document.getElementById("login").scrollIntoView({ behavior: "smooth" });
-      });
+function submitDesignerForm() {
+  alert(state.lang==="ar"?"تم تسجيل تسليم المصمم":"Designer submission saved");
+}
 
-      function createClientRequest() {
-        if (!state.currentUser || state.currentUser.role !== "client") {
-          alert("يجب أن تكون مسجلاً كعميل لإضافة الطلبات (نموذج تجريبي).");
-          return;
-        }
-        const title = document.getElementById("clientRequestTitle").value.trim();
-        const service = document.getElementById("clientServiceType").value;
-        const withPrint = document.getElementById("clientWithPrint").value === "yes";
-        const notes = document.getElementById("clientNotes").value.trim();
-        if (!title) {
-          alert("الرجاء إدخال عنوان للطلب.");
-          return;
-        }
-        const id = state.requests.length + 1;
-        state.requests.push({
-          id,
-          title,
-          service,
-          withPrint,
-          notes,
-          status: "pending"
-        });
-        document.getElementById("clientRequestTitle").value = "";
-        document.getElementById("clientNotes").value = "";
-        renderAllTables();
-      }
+function submitPrinterForm() {
+  alert(state.lang==="ar"?"تم تسجيل أمر الطباعة":"Print order saved");
+}
 
-      function renderAllTables() {
-        renderClientTable();
-        renderDesignerTable();
-        renderPrinterTable();
-        renderAdminSummary();
-      }
 
-      function renderClientTable() {
-        const tbody = document.querySelector("#clientRequestsTable tbody");
-        if (!tbody) return;
-        tbody.innerHTML = "";
-        state.requests.forEach((r) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${r.id}</td>
-            <td>${r.title}</td>
-            <td>${serviceLabel(r.service)}</td>
-            <td>${r.withPrint ? "نعم" : "لا"}</td>
-            <td>${statusLabel(r.status)}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-      }
+/* INIT */
+applyLanguage();
+render();
+</script>
 
-      function renderDesignerTable() {
-        const tbody = document.querySelector("#designerRequestsTable tbody");
-        if (!tbody) return;
-        tbody.innerHTML = "";
-        state.requests.forEach((r) => {
-          const tr = document.createElement("tr");
-          const canTake = r.status === "pending";
-          tr.innerHTML = `
-            <td>${r.id}</td>
-            <td>${r.title}</td>
-            <td>${serviceLabel(r.service)}</td>
-            <td>${statusLabel(r.status)}</td>
-            <td>
-              ${
-                canTake
-                  ? '<button class="btn btn-primary" style="padding:4px 8px;font-size:11px;" data-action="take" data-id="' +
-                    r.id +
-                    '">استلام</button>'
-                  : ""
-              }
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-        tbody.querySelectorAll("button[data-action='take']").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const id = Number(btn.getAttribute("data-id"));
-            const req = state.requests.find((r) => r.id === id);
-            if (req) {
-              req.status = "in_progress";
-              renderAllTables();
-            }
-          });
-        });
-      }
-
-      function renderPrinterTable() {
-        const tbody = document.querySelector("#printerRequestsTable tbody");
-        if (!tbody) return;
-        tbody.innerHTML = "";
-        state.requests
-          .filter((r) => r.withPrint)
-          .forEach((r) => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-              <td>${r.id}</td>
-              <td>${r.title}</td>
-              <td>${serviceLabel(r.service)}</td>
-              <td>${statusLabel(r.status)}</td>
-            `;
-            tbody.appendChild(tr);
-          });
-      }
-
-      function renderAdminSummary() {
-        const total = state.requests.length;
-        const withPrint = state.requests.filter((r) => r.withPrint).length;
-        const inProgress = state.requests.filter(
-          (r) => r.status === "in_progress"
-        ).length;
-        const totalEl = document.getElementById("adminTotalRequests");
-        const printEl = document.getElementById("adminPrintRequests");
-        const progEl = document.getElementById("adminInProgress");
-        if (totalEl) totalEl.textContent = total;
-        if (printEl) printEl.textContent = withPrint;
-        if (progEl) progEl.textContent = inProgress;
-      }
-
-      function serviceLabel(s) {
-        return {
-          logo: "تصميم شعار",
-          brand: "هوية بصرية",
-          social: "سوشال ميديا",
-          print: "مطبوعات"
-        }[s] || s;
-      }
-
-      function statusLabel(s) {
-        return {
-          pending: "في انتظار الاستلام",
-          in_progress: "قيد التنفيذ",
-          completed: "مكتمل"
-        }[s] || s;
-      }
-
-      // Initial
-      updateNavbarUser();
-    </script>
-  </body>
+</body>
 </html>
